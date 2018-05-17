@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Canvas 繪製弧形及圓餅圖</title>
+</head>
+
+<body>
+    <canvas id="cvs">您的瀏覽器不支援 canvas，請升級瀏覽器</canvas>
+
+    <script>
+        (function() {
+            var cvs = document.getElementById('cvs');
+            var ctx = cvs.getContext('2d');
+
+            cvs.width = 600;
+            cvs.height = 600;
+            cvs.style.border = '1px solid #aaa';
+
+            // 描邊矩形 (x坐標, y坐標, 寬度, 高度)
+            ctx.rect(100, 100, 50, 50);
+            ctx.stroke();
+
+            // 描邊矩形
+            ctx.strokeRect(100, 200, 50, 50);
+
+            // 填充矩形 清除矩形
+            ctx.fillRect(100, 300, 50, 50);
+            ctx.clearRect(120, 320, 10, 10);
+
+            // 繪製一條 0-30度的扇形
+            // 弧度和角度轉換公式 rad = 角度 * Math.PI / 180
+            // arc(x, y, radius, Math.PI / 180 * startAngle, Math.PI / 180 * endAngle, anticlockwise);
+            ctx.beginPath();
+            ctx.moveTo(300, 100);
+            ctx.arc(300, 100, 50, Math.PI / 180 * 0, Math.PI / 180 * 30, true);
+            ctx.closePath();
+            ctx.fill();
+
+            // 繪製圓餅圖
+            ctx.beginPath();
+            ctx.moveTo(350, 300);
+            ctx.arc(350, 300, 75, Math.PI / 180 * -90, Math.PI / 180 * -30, false);
+            ctx.closePath();
+            ctx.fillStyle = 'pink';
+            ctx.fill();
+
+            ctx.beginPath();
+            ctx.moveTo(350, 300);
+            ctx.arc(350, 300, 75, Math.PI / 180 * -30, Math.PI / 180 * 90, false);
+            ctx.closePath();
+            ctx.fillStyle = 'gray';
+            ctx.fill();
+
+            ctx.beginPath();
+            ctx.moveTo(350, 300);
+            ctx.arc(350, 300, 75, Math.PI / 180 * 90, Math.PI / 180 * 240, false);
+            ctx.closePath();
+            ctx.fillStyle = 'Khaki';
+            ctx.fill();
+
+            ctx.beginPath();
+            ctx.moveTo(350, 300);
+            ctx.arc(350, 300, 75, Math.PI / 180 * 240, Math.PI / 180 * -90, false);
+            ctx.closePath();
+            ctx.fillStyle = 'LightBlue';
+            ctx.fill();
+
+            // 繪製圓餅圖
+            var data = [{
+                'value': .2,
+                'color': 'pink'
+            }, {
+                'value': .3,
+                'color': 'gray'
+            }, {
+                'value': .4,
+                'color': 'Khaki'
+            }, {
+                'value': .1,
+                'color': 'LightBlue'
+            }];
+
+            // 起始角度
+            var tempAngle = -90;
+            var x0 = 350;
+            var y0 = 500;
+            var radius = 75;
+            // 從 -90度開始繪製
+            for (var i = 0; i < data.length; i++) {
+                ctx.beginPath();
+                ctx.moveTo(x0, y0);
+                // 當前扇形角度
+                var angle = data[i].value * 360;
+                var startAngle = Math.PI / 180 * tempAngle;
+                var endAngle = Math.PI / 180 * (tempAngle + angle);
+                ctx.fillStyle = data[i].color;
+                ctx.arc(x0, y0, radius, startAngle, endAngle);
+                ctx.closePath();
+                ctx.fill();
+                tempAngle += angle;
+
+            }
+
+            // x = 圓心x坐標 + Math.cos(rad) * 半徑
+            // y = 圓心y坐標 + Math.sin(rad) * 半徑
+            // rad = 角度 * Math.PI / 180
+
+        })();
+    </script>
+</body>
+
+</html>

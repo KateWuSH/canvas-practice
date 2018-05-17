@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Canvas 繪製表格</title>
+</head>
+
+<body>
+    <canvas id="cvs">您的瀏覽器不支援 canvas，請升級瀏覽器</canvas>
+
+    <script>
+        (function() {
+            var cvs = document.getElementById('cvs');
+            var ctx = cvs.getContext('2d');
+
+            cvs.width = 600;
+            cvs.height = 600;
+            cvs.style.border = '1px solid #aaa';
+
+            ctx.strokeStyle = 'red';
+            ctx.lineWidth = 20;
+
+            // 第一條線
+            ctx.beginPath(); //  沒有必要，默認原本就有一個狀態
+            ctx.moveTo(100, 100);
+            ctx.lineTo(300, 100);
+            ctx.stroke();
+
+            // 第二條線
+            ctx.beginPath(); // 開啟新狀態 (新路徑、新樣式)，可以繼承之前狀態的樣式，但是當前狀態設置的樣式，只能作用於當前樣式
+            ctx.moveTo(100, 200);
+            ctx.lineTo(300, 200);
+            ctx.strokeStyle = 'green';
+            ctx.stroke();
+
+            // 第三條線
+            ctx.beginPath();
+            ctx.moveTo(100, 300);
+            ctx.lineTo(300, 300);
+            ctx.strokeStyle = 'yellow';
+            ctx.stroke();
+
+        })();
+    </script>
+</body>
+
+</html>

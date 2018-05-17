@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Canvas 繪製矩形</title>
+</head>
+
+<body>
+    <canvas id="cvs">您的瀏覽器不支援 canvas，請升級瀏覽器</canvas>
+
+    <script>
+        (function() {
+            var cvs = document.getElementById('cvs');
+            var ctx = cvs.getContext('2d');
+
+            cvs.width = 600;
+            cvs.height = 600;
+            cvs.style.border = '1px solid #aaa';
+
+            // 描邊矩形 (x坐標, y坐標, 寬度, 高度)
+            ctx.rect(100, 100, 50, 50);
+            ctx.stroke();
+
+            // 描邊矩形
+            ctx.strokeRect(100, 200, 50, 50);
+
+            // 填充矩形 清除矩形
+            ctx.fillRect(100, 300, 50, 50);
+            ctx.clearRect(120, 320, 10, 10);
+
+        })();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<meta>
+<meta charset="utf-8"></meta>
+<title>Cavas</title>
+<style>
+    #cvs {
+        border: 1px solid #000;
+    }
+    
+    div {
+        margin: 20px 20px 20px 0;
+        display: inline-block;
+    }
+    
+    canvas {
+        display: block;
+    }
+</style>
+</head>
+
+<body>
+    <div><button onclick="invertColor()">color inverse</button></div>
+    <div><button onclick="invertBlack.newBW()">inverse to black & white</button></div>
+    <div><button onclick="invertBlack.origin()">reset</button></div>
+    <canvas id="cvs" width="800" height="500"></canvas>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script>
+        var cvs, ctx;
+        window.onload = function() {
+            cvs = document.getElementById('cvs');
+            ctx = cvs.getContext('2d');
+
+            // 載入影像
+            var img = new Image();
+            img.src = 'assets/images/landscape.jpg';
+            img.onload = function() { // 註冊 load 事件，圖片載入完成後，才做繪製
+                ctx.drawImage(this, 0, 0, cvs.width, cvs.height);
+            }
+
+        };
+
+        function invertColor() {
+            var pixels = ctx.getImageData(0, 0, cvs.width, cvs.height); // 要反轉顏色需知道每著像素的顏色資訊，這行可以取得 ImageData 物件
+            var data = pixels.data; // 一個像素佔據4個 bytes。r, g, b, a (紅, 綠, 藍, alpha透明度。範圍 0-255);
+            for (var i = 0; i < data.length; i += 4) {
+                data[i] = 255 - data[i]; // 紅
+                data[i + 1] = 255 - data[i + 1]; // 綠
+                data[i + 2] = 255 - data[i + 2]; // 藍
+            }
+            ctx.putImageData(pixels, 0, 0); // 不寫寬高，表示全部
+        };
+
+
+        var invertBlack = {
+            origin: function() {
+                console.log('test');
+                var pixels = ctx.getImageData(0, 0, cvs.width, cvs.height);
+                var data = pixels.data;
+                ctx.putImageData(pixels, 0, 0);
+            },
+
+            newBW: function() {
+                var pixelsNew = ctx.getImageData(0, 0, cvs.width, cvs.height);
+                var dataNew = pixelsNew.data;
+                for (var i = 0; i < dataNew.length; i += 4) {
+                    var avg = (dataNew[i] + dataNew[i + 1] + dataNew[i + 2]) / 3;
+                    dataNew[i] = dataNew[i + 1] = dataNew[i + 2] = avg;
+                }
+                ctx.putImageData(pixelsNew, 0, 0)
+            }
+        }
+    </script>
+</body>
+
+</html>

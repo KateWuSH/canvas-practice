@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Canvas 繪製表格</title>
+</head>
+
+<body>
+    <canvas id="cvs">您的瀏覽器不支援 canvas，請升級瀏覽器</canvas>
+
+    <script>
+        /* 使用(匿名函數)() 來強制執行 */
+        (function() {
+            var cvs = document.getElementById('cvs');
+            var ctx = cvs.getContext('2d');
+
+            cvs.width = 600;
+            cvs.height = 600;
+            cvs.style.border = '1px solid #aaa';
+
+            // 繪製表格
+            var rectHeight = 10;
+            var rectWidth = 10;
+            ctx.lineWidth = .5;
+
+            // 繪製橫線
+            for (var i = 0; i < cvs.height / rectHeight; i++) {
+                ctx.moveTo(0, i * rectHeight); // 畫筆起始位置
+                ctx.lineTo(cvs.width, i * rectHeight);
+                ctx.stroke();
+                // 繪製豎線
+                ctx.moveTo(i * rectWidth, 0);
+                ctx.lineTo(i * rectWidth, cvs.height);
+                ctx.strokeStyle = '#eaeaea';
+                ctx.stroke();
+            };
+
+            // 繪製 x軸 y軸
+            ctx.beginPath();
+            ctx.moveTo(100, 400);
+            ctx.lineTo(100, 100);
+            ctx.lineTo(90, 110);
+            ctx.lineTo(100, 100);
+            ctx.lineTo(110, 110);
+            ctx.lineTo(100, 100);
+            ctx.lineTo(100, 400);
+            ctx.lineTo(400, 400);
+            ctx.lineTo(390, 390);
+            ctx.lineTo(400, 400);
+            ctx.lineTo(390, 410);
+            ctx.lineTo(400, 400);
+            ctx.closePath();
+            ctx.strokeStyle = 'LightSeaGreen';
+            ctx.stroke();
+
+            // 繪製折線圖
+            ctx.beginPath();
+            ctx.moveTo(120, 350);
+            ctx.lineTo(150, 300);
+            ctx.lineTo(180, 320);
+            ctx.lineTo(230, 250);
+            ctx.lineTo(280, 320);
+            ctx.lineTo(330, 300);
+            ctx.strokeStyle = 'LightCoral';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+        })();
+    </script>
+</body>
+
+</html>

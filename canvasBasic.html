@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Canvas 入門</title>
+    <style>
+        #cvs {
+            border: 1px solid #999;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- canvas 是一張畫布。canvas 的寬高，通過 canvas 標籤進行設置；不要用 css 設定!!!! 圖片會變虛 -->
+    <!-- <canvas id="cvs" width="400" height="400"> -->
+    <canvas id="cvs">
+        IE9 以上才支援 canvas，您的瀏覽器不支援，請升級瀏覽器
+    </canvas>
+    <!-- 如果瀏覽器不支援 canvas 標籤會變成 div，一般手機版的瀏覽器都比較新，所以 canvas 在手機支援度上很 OK -->
+
+    <script>
+        window.onload = function() {
+            var cvs = document.getElementById('cvs');
+            cvs.width = 400;
+            cvs.height = 400;
+            // cvs.style.width = 400; 這樣又變成 css 設定
+            var ctx = cvs.getContext('2d'); // 如果要做 3d 就將 2d 改為 webgl 
+
+            ctx.beginPath(); // 路徑開始
+            ctx.moveTo(100, 100); // 把畫筆移動到這個位置 (x坐標, y坐標)
+            ctx.lineTo(200, 100);
+            ctx.lineTo(100, 200);
+            ctx.closePath(); // 路徑結束
+            ctx.strokeStyle = 'red'; // style 要寫在 stroke()/ fill() 前方，否則不會有樣式；rgb() rgba() #999
+            ctx.lineWidth = 4; // 2px 靠外，2px 靠內
+            ctx.stroke();
+            ctx.fillStyle = 'pink';
+            ctx.fill();
+
+
+
+        }
+    </script>
+</body>
+
+</html>
