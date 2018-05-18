@@ -56,6 +56,7 @@
                 var txt = data[i].value * 100 + '%';
 
                 var x, y;
+                // 計算文字要放的角度
                 var txtAngle = tempAngle + 1 / 2 * angle;
 
                 // 邊長x = 圓心x坐標 + Math.cos(rad) * 半徑
@@ -73,7 +74,7 @@
                 ctx.fillText(txt, x, y);
 
                 ctx.fill();
-                tempAngle += angle;
+                tempAngle += angle; // 下一次繪製的起始角度
 
             }
 
