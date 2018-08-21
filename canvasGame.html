@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>使用 Canvas 製作網頁遊戲</title>
+  <link rel="stylesheet" href="assets/css/normal/canvasGame.css">
+</head>
+
+<body>
+  <canvas id="my-canvas"></canvas>
+
+  <script>
+    // 吳哲宇 x 六角學院 - 使用 Canvas 製作網頁遊戲
+    // https://www.youtube.com/watch?v=sOHcx9jekzs&t=548s
+
+    let canvas = document.querySelector('#my-canvas');
+    let ctx = canvas.getContext('2d');
+
+    let ww = window.innerWidth
+    let wh = window.innerHeight
+
+    // 設定畫布的寬高去符合螢幕寬高，避免圖形變形
+    canvas.width = ww
+    canvas.height = wh
+
+    // 繪製相同圖形，可以透過座標系轉換，繪製出不同的位置和角度
+    // 座標系的轉移方法，有三種方法
+    // 1) translate(x, y) 移動畫布
+    // 2) rotate(deg) 旋轉畫布
+    // 3) scale(x, y) 縮放畫布
+
+    // 座標轉換的優點
+    // 1) 座標重置，容易指定
+    // 2) 可以用直覺，進行相對位置思考
+    // 3) 可在當下座標做額外繪製
+
+    // 結束座標轉移後，需要紀錄原本的座標位置和當下的座標位置
+    // 1) ctx.save() 儲存當下座標狀態
+    // 2) ctx.restore() 還原上一個儲存的狀態
+    // ** 先進後出 stack **
+
+    let obj = {
+      x: 0,
+      y: 0
+    }
+
+    function draw() {
+      // ctx.clearRect(0, 0, ww, wh);
+      ctx.fillStyle = "rgba(0, 0, 0, .2)";
+      ctx.fillRect(0, 0, ww, wh);
+      obj.x += 5
+      obj.y += 5
+      ctx.fillStyle = 'red';
+      ctx.fillRect(obj.x, obj.y, 50, 50);
+    }
+
+    setInterval(draw, 50)
+
+    // 繪圖程式架構分為四個步驟
+    // 1) initCanvas() 初始化繪圖元件
+    // 2) init() 初始化物件與變數
+    // 3) update() 更新遊戲邏輯
+    // 4) draw() 更新畫面
+
+
+
+
+
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Canvas 繪製圖片</title>
+</head>
+
+<body>
+    <canvas id="cvs">您的瀏覽器不支援 canvas，請升級瀏覽器</canvas>
+    <script>
+        (function() {
+            var cvs = document.getElementById('cvs');
+            var ctx = cvs.getContext('2d');
+
+            cvs.width = 600;
+            cvs.height = 600;
+            cvs.style.border = '1px solid #aaa';
+
+            // 第一步：創建圖片 DOM 對象
+            var img = new Image();
+            img.src = 'assets/images/sticky_monster.jpg'; // 只要設置了 src 屬性，當前的 img 對象會立即去加載圖片
+
+            img.onload = function() {
+                // 圖片加載完成後，把圖片繪製到 canvas 上
+                // context.drawImage(Image, X, Y, Width, Height)
+                ctx.drawImage(img, 100, 100);
+
+                // 如果指定寬高，最好等比例，不然圖片會變形
+                // 繪製指定寬高比圖片
+                // 等比公式： newHeight = newWidth * originHeight / originWidth
+                var ow = img.width;
+                var oh = img.height;
+                ctx.drawImage(img, 100, 250, 150, 150 * oh / ow);
+                
+            };
+
+            //繪置指定的裁切圖片
+
+            // context.drawImage(Image, sX, sY, sWidth, sHeight, x, y, width, height)
+            // sx, sy 裁剪的左上角座標
+            // sWidth, sHeight 財簡圖片的寬高
+            var imgPeople = new Image();
+            imgPeople.src = 'assets/images/people.jpg';
+
+            imgPeople.onload = function() {
+                ctx.drawImage(imgPeople, 99, 0, 99, 185, 100, 350, 99, 185);
+            }
+
+
+        })();
+
+    </script>
+</body>
+
+</html>

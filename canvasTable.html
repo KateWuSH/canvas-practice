@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Canvas 繪製表格</title>
+</head>
+
+<body>
+    <canvas id="cvs">您的瀏覽器不支援 canvas，請升級瀏覽器</canvas>
+    <canvas id="canvas">您的瀏覽器不支援 canvas，請升級瀏覽器</canvas>
+
+    <script>
+        /* 使用(匿名函數)() 來強制執行 */
+        (function() {
+            var cvs = document.getElementById('cvs');
+            var ctx = cvs.getContext('2d');
+
+            cvs.width = 600;
+            cvs.height = 600;
+            cvs.style.border = '1px solid #aaa';
+
+            // 繪製表格
+            var rectHeight = 10;
+            var rectWidth = 10;
+            ctx.lineWidth = .5;
+
+            // 繪製橫線
+            for (var i = 0; i < cvs.height / rectHeight; i++) {
+                ctx.moveTo(0, i * rectHeight); // 畫筆起始位置
+                ctx.lineTo(cvs.width, i * rectHeight);
+                ctx.stroke();
+                // 繪製豎線
+                ctx.moveTo(i * rectWidth, 0);
+                ctx.lineTo(i * rectWidth, cvs.height);
+                ctx.strokeStyle = '#eaeaea';
+                ctx.stroke();
+            };
+
+            // 繪製 x軸 y軸
+            ctx.beginPath();
+            ctx.moveTo(100, 400);
+            ctx.lineTo(100, 100);
+            ctx.lineTo(90, 110);
+            ctx.lineTo(100, 100);
+            ctx.lineTo(110, 110);
+            ctx.lineTo(100, 100);
+            ctx.lineTo(100, 400);
+            ctx.lineTo(400, 400);
+            ctx.lineTo(390, 390);
+            ctx.lineTo(400, 400);
+            ctx.lineTo(390, 410);
+            ctx.lineTo(400, 400);
+            ctx.closePath();
+            ctx.strokeStyle = 'LightSeaGreen';
+            ctx.stroke();
+
+            // 繪製折線圖
+            ctx.beginPath();
+            ctx.moveTo(120, 350);
+            ctx.lineTo(150, 300);
+            ctx.lineTo(180, 320);
+            ctx.lineTo(230, 250);
+            ctx.lineTo(280, 320);
+            ctx.lineTo(330, 300);
+            ctx.strokeStyle = 'LightCoral';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+        })();
+
+
+        (function() {
+            var canvas = document.getElementById('canvas');
+            var contxt = canvas.getContext('2d');
+
+            canvas.width = 600;
+            canvas.height = 600;
+            canvas.style.border = '1px solid #aaa';
+
+            var x0 = 100; 
+            var y0 = 500;
+            var arrowWidth = 10;
+
+            // 繪製X軸
+            contxt.beginPath();
+            contxt.strokeStyle = 'blue';
+            contxt.moveTo(x0, y0);
+            contxt.lineTo(500, 500);
+            // 往上畫箭頭
+            contxt.lineTo(500 - arrowWidth, 500 - arrowWidth);
+            contxt.moveTo(500, 500);
+            // 往下畫箭頭
+            contxt.lineTo(500 - arrowWidth, 500 + arrowWidth);
+            contxt.stroke();
+
+            // 繪製y軸
+            contxt.beginPath();
+            contxt.strokeStyle = 'green';
+            contxt.moveTo(x0, y0);
+            contxt.lineTo(100, 100);
+            contxt.lineTo(100 - arrowWidth, 100 + arrowWidth);
+            contxt.moveTo(100, 100);
+            contxt.lineTo(100 + arrowWidth, 100 + arrowWidth);
+            contxt.stroke();
+
+            // 繪製線段
+            var data = [.4, .5, .8, .2, .6];
+            var pointWidth = 400 / (data.length + 1);
+            var maxHeight = 300;
+            contxt.beginPath();
+            for(var i = 0; i < data.length; i++) {
+                var x = x0 + (i+1) * pointWidth;
+                var y = y0 - data[i] * maxHeight;
+                contxt.lineTo(x, y);
+            }
+            contxt.strokeStyle='orange';
+            contxt.stroke();
+
+        })();
+    </script>
+</body>
+
+</html>

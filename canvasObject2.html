@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Canvas 面向對象升級</title>
+</head>
+<body>
+    <script>
+        function Dog() {
+            this.age = 19;
+            this.show = function() {
+
+            }
+        }
+
+        var dog = new Dog();
+        var dog1 = new Dog();
+
+        console.log(dog == dog1); // false
+        console.log(dog);
+        console.log(dog1);
+        // 因為每個 new 出來的對象，會有各自的屬性，所以 age 是每個對象都需要有一份
+        // 但是方法因為邏輯皆相同，不需要每個對象都存一份，只要將所有對象的方法封裝到構造函數的原型裡面，以節省內存空間，當被調用時它們在自身裡找不到該方法，就會去構造函數的原型裡面找
+        dog.age = 20;
+        dog1.age = 23;
+        console.log(dog.age); // 20
+        console.log(dog1.age);  // 23 它們是各自獨立的
+
+
+        // 創建對象 可以直接把方法封裝到原型裡
+        function Cat() {
+            this.age = 19;
+        }
+
+        Cat.prototype.show = function() {
+            console.log('show your age ' + this.age);
+        }
+
+        var cat = new Cat();
+        var cat1 = new Cat();
+
+        cat.age = 21;
+        cat1.age = 25;
+        
+        cat.show(); // 它們都可以調用的到 show();
+        cat1.show();
+        
+        /* 為什麼存在 prototype 裡面可以取用到呢? 因為用 __proto__ 來進行連接，所以 cat 的 __proto__ 會指向 Cat.prototype。
+           當 cat 裡面找不到 show 這個方法時，javascript 會試著透過 __proto__ 找到 Cat.prototype，如果再找不到，會依照這個規則繼續往下去找 
+           Cat.prototype.__proto__，一直找到 __proto__ 為 null 才停下來，這就稱為 原型鏈 */
+        console.log(cat.__proto__ === Cat.prototype); // true
+        
+
+        // 創建對象 將屬性變成參數帶入
+        function Cow(age, location) {
+            this.age = age;
+            this.location = location
+        } // 缺點是參數一定要按照順序
+
+        Cow.prototype.show = function() {
+            console.log(this.age);
+        }
+
+        var cow = new Cow(20, 'Japen');
+        var cow1 = new Cow(28, 'USA');
+        console.log(cow);
+        console.log(cow1);
+
+
+        // 創建對象 將屬性變成一個對象
+        function Bird(option) {
+            this.age = option.age;
+            this.location = option.location
+        } 
+
+        Bird.prototype.show = function() {
+            console.log(this.age);
+        }
+
+        var bird = new Bird({
+            location: 'Taichung',
+            age: 18
+        });
+
+        var bird2 = new Bird({
+            location: 'England',
+            age: 27
+        });
+        console.log(bird);
+        console.log(bird2);
+
+
+        // 將屬性直接寫到原型對象裡
+        function Snake(option) {
+            this._init(option);
+        }
+
+        Snake.prototype = {
+            _init: function(option) {
+                this.age = option.age || '';
+            },
+            show: function() {
+                console.log(this.age);
+            }
+        };
+
+        console.log(Snake);
+
+        var snake = new Snake(20);
+        snake._init(20);
+        snake.show();
+
+    </script>
+</body>
+</html>

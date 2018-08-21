@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Canvas 面向對象補充</title>
+</head>
+<body>
+    <script>
+        // 創建對象的方式：
+        // 第一種： json 方式 (臨時性的儲存，只能用一次)
+        // var object = { key: value };
+        // var array = [1, 2, 4, {}];
+        var obj = {
+            name: 'Kate',
+            age: 18,
+            sayHi: function() {
+                // this === obj // true
+                console.log('Hello ' + this.name);
+            }
+        };
+        obj.sayHi();
+        // 缺點：不能把 json 對象當成一個模板，通過 new 來創建一個新對象 var t = new obj();
+        // -> 給 json 對象添加屬性
+        obj.location = "Taiwan";
+        console.log(obj);
+        // -> 給 json 對象添加方法
+        obj.show = function() {
+        };
+
+        // 第二種：創建對象的方式 (不推薦)
+        var obj2 = new Object();
+        obj2.age = 20;
+        obj2.show = function() {
+        };
+        // 缺點：不能把 json 對象當成一個模板，通過 new 來創建一個新對象 var t = new obj();
+
+        // 第三種：創建對象的方式
+        function Dog() {
+            // this = {} 讓 this 指向一個空對象
+            this.age = 18; // 要用 this 才可添加屬性，並指向新物件 (dog)
+            this.show = function() {
+                console.log(this.age);
+            };
+            name = 'Kate'; // 等同 window.name ，屬於全域變數，汙染全局
+            this.name = 'Kate';
+        }
+
+        var dog = new Dog();
+        var dog1 = new Dog();
+        dog === dog1; // flase
+        // new 的內部原理
+            // 第一步：創建一個空對象
+            // 第二步：把 this 指向這個新的空對象
+            // 第三步：把空對象的內部原型(__proto__) 指向 構造函數的原型對象 (prototype) 所以 dog.__proto__ == Dog.prototype // true
+                // 函數才有 prototype；而 __proto__ 是所有對象都有
+            // 第四步：當構造函數執行完成後，如果沒有 return 的話，那麼把當前的空對象返回
+        console.log(dog);
+        dog.show();
+
+
+        // 如果構造函數有 return
+        function Bird() {
+            this.age = 20;
+            this.show = function() {};
+
+            return {
+                demo: '123'
+            }
+        }
+        var t = new Bird();
+        console.log(t); // 如果構造函數有 return，新建立的 t 只有構造函數中 return 的部分 (demo)
+    </script>
+</body>
+</html>

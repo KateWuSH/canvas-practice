@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Canvas 繪製圓餅圖</title>
+</head>
+
+<body>
+    <canvas id="cvs">您的瀏覽器不支援 canvas，請升級瀏覽器</canvas>
+
+    <script>
+        (function() {
+            var cvs = document.getElementById('cvs');
+            var ctx = cvs.getContext('2d');
+
+            cvs.width = 900;
+            cvs.height = 600;
+            cvs.style.border = '1px solid #aaa';
+
+            // 繪製座標參照線
+            ctx.beginPath();
+            ctx.moveTo(0, 301);
+            ctx.lineTo(900, 301);
+            ctx.lineTo(450, 301);
+            ctx.lineTo(450, 600);
+            ctx.strokeStyle = 'teal';
+            ctx.stroke();
+            ctx.fillRect(445, 295, 10, 10);
+
+            //繪製字體
+            ctx.font = '20px "微軟雅黑"';
+            ctx.fillStyle = 'Crimson';
+
+            // 各種文字 baseline 的位置
+            // context.textBaseline ='top | bottom | middle | alphabetic | hanging | ideographic';
+            // context.fillText(text, x, y, maxWidth);
+            ctx.textBaseline = 'top';
+            ctx.fillText('Top', 100, 300);
+            ctx.textBaseline = "bottom";
+            ctx.fillText("Bottom", 200, 300);
+            ctx.textBaseline = "middle";
+            ctx.fillText("Middle", 300, 300);
+            ctx.textBaseline = "alphabetic";
+            ctx.fillText("Alphabetic", 500, 300); // 英文基線
+            ctx.textBaseline = "hanging";
+            ctx.fillText("Hanging", 650, 300); // 印度文基線
+            ctx.textBaseline = "ideographic";
+            ctx.fillText("中文基線", 750, 300); // 中文基線
+
+            // 文字的對齊方式
+            // context.textAlign='start | left | center | right | end';
+            ctx.strokeStyle = 'Chocolate'
+            ctx.textAlign = 'left';
+            ctx.strokeText('left', 450, 350);
+            ctx.textAlign = 'right';
+            ctx.strokeText('right', 450, 400);
+            ctx.textAlign = 'start';
+            ctx.strokeText('start', 450, 450);
+            ctx.textAlign = 'end';
+            ctx.strokeText('end', 450, 500);
+            ctx.textAlign = 'center';
+            ctx.strokeText('center', 450, 550);
+
+
+
+
+
+
+
+
+
+
+
+
+        })();
+    </script>
+</body>
+
+</html>
