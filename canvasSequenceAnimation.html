@@ -16,10 +16,10 @@
     <button id="btn-dir-right">→</button>
     <button id="btn-dir-front">↓</button>
     <button id="btn-dir-back">↑</button>
-    
+
 
     <script>
-        (function() {
+        (function () {
             var cvs = document.getElementById('cvs');
             var ctx = cvs.getContext('2d');
 
@@ -30,9 +30,9 @@
             var img3 = new Image();
             img3.src = 'assets/images/people.jpg';
 
-            img3.onload = function() {
+            img3.onload = function () {
                 var frameIndex = 0;
-                setInterval(function() {
+                setInterval(function () {
                     // 清除之前的圖片
                     ctx.clearRect(350, 0, 98, 185);
                     // canvas.width = canvas.width; 另一種清除的方式：通過代碼重新設置 canvas 畫布的寬高，那麼畫布裡面的所有內容都被清空，不建議使用
@@ -49,16 +49,16 @@
                     );
 
                     frameIndex++; // 添加到下一幀
-                    frameIndex %=4; // 取餘數，就會只重複 0~3
-                    
+                    frameIndex %= 4; // 取餘數，就會只重複 0~3
+
                 }, 1000 / 10); // 10幀，100毫秒繪製一張
             };
 
             var img2 = new Image();
             img2.src = 'assets/images/fall.jpg';
-            img2.onload = function() {
+            img2.onload = function () {
                 var frame = 0;
-                setInterval(function() {
+                setInterval(function () {
                     // context.drawImage(Image, sX, sY, sWidth, sHeight, x, y, width, height)
                     // sx, sy 裁剪的左上角座標
                     // sWidth, sHeight 財簡圖片的寬高
@@ -83,10 +83,10 @@
             var dirIndex = 3;
             var img = new Image();
             img.src = 'assets/images/walk.jpg';
-            img.onload = function() {
+            img.onload = function () {
                 var frameWidth = 0;
-                
-                setInterval(function() {
+
+                setInterval(function () {
                     ctx.drawImage(
                         img,
                         frameWidth * 118,
@@ -95,33 +95,33 @@
                         119,
                         50,
                         100,
-                        118*2,
-                        119*2
+                        118 * 2,
+                        119 * 2
                     );
 
                     frameWidth++;
-                    frameWidth %=11;
+                    frameWidth %= 11;
                 }, 900 / 10);
             };
 
             // 綁定按鈕的點擊事件
             var btnLeft = document.getElementById('btn-dir-left');
-            btnLeft.onclick = function() {
+            btnLeft.onclick = function () {
                 dirIndex = 1;
             };
 
             var btnRight = document.getElementById('btn-dir-right');
-            btnRight.onclick = function() {
+            btnRight.onclick = function () {
                 dirIndex = 0;
             };
-            
+
             var btnFront = document.getElementById('btn-dir-front');
-            btnFront.onclick = function() {
+            btnFront.onclick = function () {
                 dirIndex = 3;
             }
 
             var btnBack = document.getElementById('btn-dir-back');
-            btnBack.onclick = function() {
+            btnBack.onclick = function () {
                 dirIndex = 2;
             }
 

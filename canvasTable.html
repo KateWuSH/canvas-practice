@@ -14,7 +14,7 @@
 
     <script>
         /* 使用(匿名函數)() 來強制執行 */
-        (function() {
+        (function () {
             var cvs = document.getElementById('cvs');
             var ctx = cvs.getContext('2d');
 
@@ -72,7 +72,7 @@
         })();
 
 
-        (function() {
+        (function () {
             var canvas = document.getElementById('canvas');
             var contxt = canvas.getContext('2d');
 
@@ -80,7 +80,7 @@
             canvas.height = 600;
             canvas.style.border = '1px solid #aaa';
 
-            var x0 = 100; 
+            var x0 = 100;
             var y0 = 500;
             var arrowWidth = 10;
 
@@ -111,12 +111,12 @@
             var pointWidth = 400 / (data.length + 1);
             var maxHeight = 300;
             contxt.beginPath();
-            for(var i = 0; i < data.length; i++) {
-                var x = x0 + (i+1) * pointWidth;
+            for (var i = 0; i < data.length; i++) {
+                var x = x0 + (i + 1) * pointWidth;
                 var y = y0 - data[i] * maxHeight;
                 contxt.lineTo(x, y);
             }
-            contxt.strokeStyle='orange';
+            contxt.strokeStyle = 'orange';
             contxt.stroke();
 
         })();

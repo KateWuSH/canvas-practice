@@ -2,18 +2,19 @@
 <html>
 
 <meta>
-<meta charset="utf-8"></meta>
+<meta charset="utf-8">
+</meta>
 <title>Cavas</title>
 <style>
     #cvs {
         border: 1px solid #000;
     }
-    
+
     div {
         margin: 20px 20px 20px 0;
         display: inline-block;
     }
-    
+
     canvas {
         display: block;
     }
@@ -26,17 +27,18 @@
     <div><button onclick="invertBlack.origin()">reset</button></div>
     <canvas id="cvs" width="800" height="500"></canvas>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
     <script>
         var cvs, ctx;
-        window.onload = function() {
+        window.onload = function () {
             cvs = document.getElementById('cvs');
             ctx = cvs.getContext('2d');
 
             // 載入影像
             var img = new Image();
             img.src = 'assets/images/landscape.jpg';
-            img.onload = function() { // 註冊 load 事件，圖片載入完成後，才做繪製
+            img.onload = function () { // 註冊 load 事件，圖片載入完成後，才做繪製
                 ctx.drawImage(this, 0, 0, cvs.width, cvs.height);
             }
 
@@ -55,14 +57,14 @@
 
 
         var invertBlack = {
-            origin: function() {
+            origin: function () {
                 console.log('test');
                 var pixels = ctx.getImageData(0, 0, cvs.width, cvs.height);
                 var data = pixels.data;
                 ctx.putImageData(pixels, 0, 0);
             },
 
-            newBW: function() {
+            newBW: function () {
                 var pixelsNew = ctx.getImageData(0, 0, cvs.width, cvs.height);
                 var dataNew = pixelsNew.data;
                 for (var i = 0; i < dataNew.length; i += 4) {

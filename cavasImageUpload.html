@@ -2,18 +2,19 @@
 <html>
 
 <meta>
-<meta charset="utf-8"></meta>
+<meta charset="utf-8">
+</meta>
 <title>Cavas</title>
 <style>
     #cvs {
         border: 1px solid #000;
     }
-    
+
     button {
         margin: 20px 20px 20px 0;
         display: inline-block;
     }
-    
+
     canvas {
         display: block;
     }
@@ -27,10 +28,11 @@
     <button onclick="invertColor()">color inverse</button>
     <canvas id="cvs" width="800" height="500"></canvas>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
     <script>
         var cvs, ctx;
-        window.onload = function() {
+        window.onload = function () {
             cvs = document.getElementById('cvs');
             ctx = cvs.getContext('2d');
 
@@ -42,7 +44,7 @@
             var src = URL.createObjectURL(file); // URL 為瀏覽器預設的物件
             var img = new Image();
             img.src = src;
-            img.onload = function() {
+            img.onload = function () {
                 ctx.drawImage(this, 0, 0, cvs.width, cvs.height);
             }
         };

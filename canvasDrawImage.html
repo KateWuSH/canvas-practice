@@ -11,7 +11,7 @@
 <body>
     <canvas id="cvs">您的瀏覽器不支援 canvas，請升級瀏覽器</canvas>
     <script>
-        (function() {
+        (function () {
             var cvs = document.getElementById('cvs');
             var ctx = cvs.getContext('2d');
 
@@ -23,7 +23,7 @@
             var img = new Image();
             img.src = 'assets/images/sticky_monster.jpg'; // 只要設置了 src 屬性，當前的 img 對象會立即去加載圖片
 
-            img.onload = function() {
+            img.onload = function () {
                 // 圖片加載完成後，把圖片繪製到 canvas 上
                 // context.drawImage(Image, X, Y, Width, Height)
                 ctx.drawImage(img, 100, 100);
@@ -34,7 +34,7 @@
                 var ow = img.width;
                 var oh = img.height;
                 ctx.drawImage(img, 100, 250, 150, 150 * oh / ow);
-                
+
             };
 
             //繪置指定的裁切圖片
@@ -45,7 +45,7 @@
             var imgPeople = new Image();
             imgPeople.src = 'assets/images/people.jpg';
 
-            imgPeople.onload = function() {
+            imgPeople.onload = function () {
                 ctx.drawImage(imgPeople, 99, 0, 99, 185, 100, 350, 99, 185);
             }
 
